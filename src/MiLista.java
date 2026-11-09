@@ -1,9 +1,7 @@
 import java.lang.Object;
 import java.util.Iterator;
 
-
-
-public class MiLista implements Iterable<ListNode> {
+public class MiLista implements Iterable<MiLista.ListNode> {
 
     public static class ListNode {
         public Object object;
@@ -31,83 +29,63 @@ public class MiLista implements Iterable<ListNode> {
         this.cabeza = null;
     }
 
-
-
-
-    @Override
     public boolean isEmpty() {
-        if (this.cabeza == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.cabeza == null;
     }
 
-    }
 
-    @Override
     public int getSize() {
+        if (isEmpty()) {
+            return 0;
+        }
         ListNode iterador = this.cabeza;
-        int contador = 1;
-        while (iterador.siguiente != null){
+        int contador = 0;
+        while (iterador != null) {
             iterador = iterador.siguiente;
-            contador = contador + 1;
+            contador++;
         }
         return contador;
     }
 
-    @Override
+
     public void clear() {
         this.cabeza = null;
-
-
     }
 
-    @Override
     public Object getHead() {
-
-
-        return this.cabeza.dato;
+        if (isEmpty()) {
+            return null;
+        }
+        return this.cabeza.object;
     }
 
-    @Override
     public Object getTail() {
-        if (isEmpty()) {// 0 si head == null
+        if (isEmpty()) {
             return null;
-
         }
 
         ListNode tail = this.cabeza;
-        //ciclo
         while (tail.siguiente != null) {
             tail = tail.siguiente;
-
-         
         }
 
-        return tail.dato;
+        return tail.object;
     }
 
-    @Override
     public Object get(ListNode node) {
         try {
-
             if (node == null || this.cabeza == null) {
                 return null;
             }
 
             ListNode iterador = this.cabeza;
 
-
             while (iterador != null) {
-
                 if (iterador == node) {
-                    return iterador.Object;
+                    return iterador.object;
                 }
-
                 iterador = iterador.siguiente;
             }
-
 
             return null;
 
@@ -117,11 +95,8 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-
-    @Override
     public Object search(Object object) {
         try {
-
             if (object == null || this.cabeza == null) {
                 return null;
             }
@@ -129,11 +104,9 @@ public class MiLista implements Iterable<ListNode> {
             ListNode iterador = this.cabeza;
 
             while (iterador != null) {
-
                 if (iterador.object != null && iterador.object.equals(object)) {
-                    return iterador.object; // Se encontró y se retorna el objeto
+                    return iterador.object;
                 }
-
                 iterador = iterador.siguiente;
             }
 
@@ -145,24 +118,18 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-
-    @Override
     public boolean add(Object object) {
         try {
-
             if (this.cabeza == null) {
                 ListNode nuevaCabeza = new ListNode(object);
                 this.cabeza = nuevaCabeza;
             } else {
-
                 ListNode nuevaCola = new ListNode(object);
                 ListNode iterador = this.cabeza;
-
 
                 while (iterador.siguiente != null) {
                     iterador = iterador.siguiente;
                 }
-
 
                 iterador.siguiente = nuevaCola;
             }
@@ -175,10 +142,8 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public boolean insert(ListNode node, Object object) {
         try {
-
             if (node == null || this.cabeza == null) {
                 return false;
             }
@@ -187,18 +152,11 @@ public class MiLista implements Iterable<ListNode> {
 
             while (iterador != null) {
                 if (iterador == node) {
-
                     ListNode nuevoNodo = new ListNode(object);
-
-
                     nuevoNodo.siguiente = iterador.siguiente;
-
-
                     iterador.siguiente = nuevoNodo;
-
                     return true;
                 }
-
                 iterador = iterador.siguiente;
             }
 
@@ -210,10 +168,8 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public boolean insert(Object ob, Object object) {
         try {
-
             if (ob == null || object == null || this.cabeza == null) {
                 return false;
             }
@@ -221,23 +177,14 @@ public class MiLista implements Iterable<ListNode> {
             ListNode iterador = this.cabeza;
 
             while (iterador != null) {
-
                 if (iterador.object != null && iterador.object.equals(ob)) {
-
                     ListNode nuevoNodo = new ListNode(object);
-
-
                     nuevoNodo.siguiente = iterador.siguiente;
-
-
                     iterador.siguiente = nuevoNodo;
-
                     return true;
                 }
-
                 iterador = iterador.siguiente;
             }
-
 
             return false;
 
@@ -247,44 +194,35 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public boolean insertHead(Object object) {
         try {
-            // 1er paso: Crear el nuevo nodo con la información recibida
             ListNode nuevaCabeza = new ListNode(object);
-            //2do paso: Conectar el nodo a la cabeza
             nuevaCabeza.siguiente = this.cabeza;
-            //3er paso: redefinir la cabeza
             this.cabeza = nuevaCabeza;
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Ocurrió un error");
             return false;
         }
     }
 
-    @Override
     public boolean insertTail(Object object) {
-        if(this.cabeza == null){
+        if (this.cabeza == null) {
             ListNode nuevaCabeza = new ListNode(object);
             this.cabeza = nuevaCabeza;
-        }else {
+        } else {
             ListNode nuevaCola = new ListNode(object);
             ListNode iterador = this.cabeza;
             while (iterador.siguiente != null) {
                 iterador = iterador.siguiente;
-
             }
             iterador.siguiente = nuevaCola;
         }
         return true;
-
     }
 
-    @Override
     public boolean set(ListNode node, Object object) {
         try {
-
             if (node == null || this.cabeza == null) {
                 return false;
             }
@@ -293,14 +231,11 @@ public class MiLista implements Iterable<ListNode> {
 
             while (iterador != null) {
                 if (iterador == node) {
-
                     iterador.object = object;
                     return true;
                 }
-
                 iterador = iterador.siguiente;
             }
-
 
             return false;
 
@@ -310,7 +245,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public boolean remove(ListNode node) {
         try {
             if (node == null || this.cabeza == null) {
@@ -340,7 +274,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public boolean contains(Object object) {
         try {
             if (object == null || this.cabeza == null) {
@@ -363,6 +296,7 @@ public class MiLista implements Iterable<ListNode> {
             return false;
         }
     }
+
     @Override
     public Iterator<ListNode> iterator() {
         try {
@@ -389,7 +323,7 @@ public class MiLista implements Iterable<ListNode> {
             return null;
         }
     }
-    @Override
+
     public Object[] toArray() {
         try {
             int tamano = getSize();
@@ -411,7 +345,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
     public Object[] toArray(Object[] object) {
         try {
             int tamano = getSize();
@@ -441,31 +374,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
-    public Object getBeforeTo() {
-        try {
-            if (node == null || this.cabeza == null || this.cabeza == node) {
-                return null;
-            }
-
-            ListNode iterador = this.cabeza;
-
-            while (iterador.siguiente != null) {
-                if (iterador.siguiente == node) {
-                    return iterador.object;
-                }
-                iterador = iterador.siguiente;
-            }
-
-            return null;
-
-        } catch (Exception e) {
-            System.out.println("Ocurrió un error al obtener el elemento anterior");
-            return null;
-        }
-    }
-
-    @Override
     public Object getBeforeTo(ListNode node) {
         try {
             if (node == null || this.cabeza == null || this.cabeza == node) {
@@ -489,8 +397,7 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-    @Override
-    public Object getNextTo() {
+    public Object getNextTo(ListNode node) {
         try {
             if (node == null || this.cabeza == null) {
                 return null;
@@ -517,8 +424,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-
-    @Override
     public MiLista subList(ListNode from, ListNode to) {
         try {
             MiLista subLista = new MiLista();
@@ -553,8 +458,6 @@ public class MiLista implements Iterable<ListNode> {
         }
     }
 
-
-    @Override
     public MiLista sortList() {
         try {
             MiLista listaOrdenada = new MiLista();
@@ -565,7 +468,7 @@ public class MiLista implements Iterable<ListNode> {
 
             ListNode iteradorActual = this.cabeza;
             while (iteradorActual != null) {
-                listaOrdenada.add(iteradorActual.Object);
+                listaOrdenada.add(iteradorActual.object);
                 iteradorActual = iteradorActual.siguiente;
             }
 
@@ -579,9 +482,9 @@ public class MiLista implements Iterable<ListNode> {
                     Comparable siguiente = (Comparable) iterador.siguiente.object;
 
                     if (actual != null && siguiente != null && actual.compareTo(siguiente) > 0) {
-                        Object temp = iterador.Object;
-                        iterador.Object = iterador.siguiente.Object;
-                        iterador.siguiente.Object = temp;
+                        Object temp = iterador.object;
+                        iterador.object = iterador.siguiente.object;
+                        iterador.siguiente.object = temp;
                         huboIntercambio = true;
                     }
                     iterador = iterador.siguiente;
@@ -624,14 +527,4 @@ public class MiLista implements Iterable<ListNode> {
             return "[]";
         }
     }
-
-void main() {
 }
-
-
-
-private ListNode cabeza;
-
-
-
-

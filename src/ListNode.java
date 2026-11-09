@@ -1,4 +1,5 @@
 public class ListNode {
+    public Object object;
     Object dato;
     ListNode siguiente;
 
